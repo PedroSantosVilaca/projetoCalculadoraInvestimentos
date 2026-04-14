@@ -43,7 +43,12 @@ function validateInput(evt) {
   const { grandParentElement } = evt.target.parentElement;
 
   const inputValue = evt.target.value.replace(",", ".");
-  if (isNaN(inputValue) || Number(inputValue) > 0) {
+  if (isNaN(inputValue) || Number(inputValue) <= 0) {
+    const errorTextElement = document.createElement("p");
+    errorTextElement.classList.add("text-red-500");
+    errorTextElement.innerText = "Insira um valor numérico maior que zero";
+    parentElement.classList.add("error");
+    grandParentElement.appendChild(errorTextElement);
   }
 }
 
