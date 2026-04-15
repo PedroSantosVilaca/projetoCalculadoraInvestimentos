@@ -2,6 +2,8 @@ import "./style.css";
 import { generateReturnsArray } from "./investmentGoals.js";
 
 const form = document.getElementById("investment-form");
+const clearFormButton = document.getElementById("clear-form");
+
 function renderProgression(evt) {
   evt.preventDefault();
   if (document.querySelector(".error")) {
@@ -38,18 +40,34 @@ function renderProgression(evt) {
   console.log(returnsArray);
 }
 
+function clearForm() {
+  const form = document.querySelector("form");
+  form["starting-amount"].value = "";
+  form["additional-contribuition"].value = "";
+  form["time-amount"].value = "";
+  form["return-rate"].value = "";
+  form["tax-rate"].value = "";
+
+  const errorInputContainers = document.querySelectorAll(".error");
+
+  for (const errorInputContainer of errorInputContainers) {
+    errorInputContainer.classList.remove("error");
+    errorInputContainer.parentElement.querySelector("p").remove;
+  }
+}
+
 function validateInput(evt) {
   if (evt.target.value === "") {
     return;
   }
 
-  const { parentElement } = evt.target;
-  const { grandParentElement } = evt.target.parentElement;
+  const parentElement = evt.target.parentElement;
+  const grandParentElement = parentElement.parentElement;
 
   const inputValue = evt.target.value.replace(",", ".");
   if (
-    isNaN(inputValue) ||
-    (Number(inputValue) <= 0 && !parentElement.classList.contains(error))
+    !parentElement.classList.contains("error") &&
+    (isNaN(inputValue) || Number(inputValue))
   ) {
     const errorTextElement = document.createElement("p");
     errorTextElement.classList.add("text-red-500");
@@ -58,7 +76,7 @@ function validateInput(evt) {
     grandParentElement.appendChild(errorTextElement);
   } else if (
     parentElement.classList.contains("error") &&
-    isNaN(inputValue) &&
+    !isNaN(inputValue) &&
     Number(inputValue) > 0
   ) {
     parentElement.classList.remove("error");
@@ -71,4 +89,6 @@ for (const formElement of form) {
     formElement.addEventListener("blur", validateInput);
   }
 }
+clearFormButton.addEventListener("click", clearForm);
+
 form.addEventListener("submit", renderProgression);

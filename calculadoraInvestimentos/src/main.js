@@ -2,7 +2,7 @@ import "./style.css";
 import { generateReturnsArray } from "./investmentGoals.js";
 
 const calculateButton = document.getElementById("calculate-results");
-
+const clearFormButton = document.getElementById("clear-form");
 function renderProgression() {
   const startingAmount = Number(
     document.getElementById("starting-amount").value,
