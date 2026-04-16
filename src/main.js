@@ -125,6 +125,14 @@ function renderProgression(evt) {
     }
   }
 
+  const columnsArray = [
+    { columnLabel: "Total Investido", acessor: "investedAmount" },
+    { columnLabel: "Rendimento Mensal", acessor: "interestReturns" },
+    { columnLabel: "Rendimento Total", acessor: "totalInterestReturns" },
+    { columnLabel: "Mês", acessor: "month" },
+    { columnLabel: "Quantia Total", acessor: "totalAmount" },
+  ];
+
   function clearForm() {
     const form = document.querySelector("form");
     form["starting-amount"].value = "";
