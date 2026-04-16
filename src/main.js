@@ -48,7 +48,7 @@ function renderProgression(evt) {
   );
   const returnFinalInvestmentObject = returnsArray[returnsArray.length - 1];
 
-  doughnutChartReference = new Chart(finalMoneyChart, {
+  /*doughnutChartReference = new Chart(finalMoneyChart, {
     type: "doughnut",
     data: {
       labels: ["Total Investido", "Rendimento", "Imposto"],
@@ -109,72 +109,73 @@ function renderProgression(evt) {
       },
     },
   });
-}
+} */
 
-function isObjectEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-function resetCharts() {
-  if (
-    !isObjectEmpty(doughnutChartReference) &&
-    !isObjectEmpty(progressionChartReference)
-  ) {
-    doughnutChartReference.destroy();
-    progressionChartReference.destroy();
-  }
-}
-
-function clearForm() {
-  const form = document.querySelector("form");
-  form["starting-amount"].value = "";
-  form["additional-contribuition"].value = "";
-  form["time-amount"].value = "";
-  form["return-rate"].value = "";
-  form["tax-rate"].value = "";
-
-  resetCharts();
-  const errorInputContainers = document.querySelectorAll(".error");
-
-  for (const errorInputContainer of errorInputContainers) {
-    errorInputContainer.classList.remove("error");
-    errorInputContainer.parentElement.querySelector("p").remove;
-  }
-}
-
-function validateInput(evt) {
-  if (evt.target.value === "") {
-    return;
+  function isObjectEmpty(obj) {
+    return Object.keys(obj).length === 0;
   }
 
-  const parentElement = evt.target.parentElement;
-  const grandParentElement = parentElement.parentElement;
-
-  const inputValue = evt.target.value.replace(",", ".");
-  if (
-    !parentElement.classList.contains("error") &&
-    (isNaN(inputValue) || Number(inputValue))
-  ) {
-    const errorTextElement = document.createElement("p");
-    errorTextElement.classList.add("text-red-500");
-    errorTextElement.innerText = "Insira um valor numérico maior que zero";
-    parentElement.classList.add("error");
-    grandParentElement.appendChild(errorTextElement);
-  } else if (
-    parentElement.classList.contains("error") &&
-    !isNaN(inputValue) &&
-    Number(inputValue) > 0
-  ) {
-    parentElement.classList.remove("error");
-    grandParentElement.querySelector("p").remove();
+  function resetCharts() {
+    if (
+      !isObjectEmpty(doughnutChartReference) &&
+      !isObjectEmpty(progressionChartReference)
+    ) {
+      doughnutChartReference.destroy();
+      progressionChartReference.destroy();
+    }
   }
-}
 
-for (const formElement of form) {
-  if (formElement.tagName === "INPUT" && formElement.hasAttribute("name")) {
-    formElement.addEventListener("blur", validateInput);
+  function clearForm() {
+    const form = document.querySelector("form");
+    form["starting-amount"].value = "";
+    form["additional-contribuition"].value = "";
+    form["time-amount"].value = "";
+    form["return-rate"].value = "";
+    form["tax-rate"].value = "";
+
+    resetCharts();
+    const errorInputContainers = document.querySelectorAll(".error");
+
+    for (const errorInputContainer of errorInputContainers) {
+      errorInputContainer.classList.remove("error");
+      errorInputContainer.parentElement.querySelector("p").remove;
+    }
   }
-}
-clearFormButton.addEventListener("click", clearForm);
 
-form.addEventListener("submit", renderProgression);
+  function validateInput(evt) {
+    if (evt.target.value === "") {
+      return;
+    }
+
+    const parentElement = evt.target.parentElement;
+    const grandParentElement = parentElement.parentElement;
+
+    const inputValue = evt.target.value.replace(",", ".");
+    if (
+      !parentElement.classList.contains("error") &&
+      (isNaN(inputValue) || Number(inputValue))
+    ) {
+      const errorTextElement = document.createElement("p");
+      errorTextElement.classList.add("text-red-500");
+      errorTextElement.innerText = "Insira um valor numérico maior que zero";
+      parentElement.classList.add("error");
+      grandParentElement.appendChild(errorTextElement);
+    } else if (
+      parentElement.classList.contains("error") &&
+      !isNaN(inputValue) &&
+      Number(inputValue) > 0
+    ) {
+      parentElement.classList.remove("error");
+      grandParentElement.querySelector("p").remove();
+    }
+  }
+
+  for (const formElement of form) {
+    if (formElement.tagName === "INPUT" && formElement.hasAttribute("name")) {
+      formElement.addEventListener("blur", validateInput);
+    }
+  }
+  clearFormButton.addEventListener("click", clearForm);
+
+  /*form.addEventListener("submit", renderProgression);*/
+}

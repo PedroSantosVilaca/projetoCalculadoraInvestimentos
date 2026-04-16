@@ -145,7 +145,7 @@
       </div>
     </aside>
     <main class="row-span-2 col-span-2">
-      <section id="charts-container" class="h-full"> 
+      <!--<section id="charts-container" class="h-full"> 
         <div class="h-[36%] flex flex-col items-center pb-10" >  
           <p class="font-bold text-lg">Resultado Final</p>
           <canvas id="final-money-distribution"></canvas>
@@ -154,8 +154,33 @@
           <p class="font-bold text-lg">Progressão</p>
           <canvas id="progression"></canvas>
         </div>
+      </section> -->
+      <section id="table-container" class="h-full">
+        <p class="font-bold text-lg text-center">Resultados Mensais</p>
+        <table class="w-full max-h-full border border-separate">
+          <thead>
+            <th>Mês</th>
+            <th>Juros</th>
+            <th>Total Investido</th></thead>
+          <tbody>
+            <tr>
+              <td class="text-center">0</td>
+              <td class="text-center">0</td>
+              <td class="text-center">1000</td>
+          </tr>
+            <tr>
+              <td class="text-center">0</td>
+              <td class="text-center">0</td>
+              <td class="text-center">1000</td>
+            </tr>
+            <tr>
+              <td class="text-center">0</td>
+              <td class="text-center">0</td>
+              <td class="text-center">1000</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
-   
       </script>
     </main>
     <script type="module" src="/src/main.js"></script>
