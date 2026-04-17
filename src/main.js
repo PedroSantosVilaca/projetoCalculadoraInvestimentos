@@ -185,5 +185,5 @@ function renderProgression(evt) {
   }
   clearFormButton.addEventListener("click", clearForm);
 
-  /*form.addEventListener("submit", renderProgression);*/
+  form.addEventListener("submit", renderProgression);
 }
