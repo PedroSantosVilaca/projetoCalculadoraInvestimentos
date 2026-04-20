@@ -11,8 +11,12 @@ const clearFormButton = document.getElementById("clear-form");
 let doughnutChartReference = {};
 let progressionChartReference = {};
 
-function formatCurrency(value) {
+function formatCurrencyToTable(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+function formatCurrencyToGraph(value) {
+  return value.toFixed(2);
 }
 
 function renderProgression(evt) {
@@ -52,25 +56,25 @@ function renderProgression(evt) {
     {
       columnLabel: "Valor investido",
       accessor: "investedAmount",
-      format: (numberinfo) => formatCurrency(numberinfo),
+      format: (numberinfo) => formatCurrencyToTable(numberinfo),
     },
     {
       columnLabel: "Rendimento",
       accessor: "interestReturns",
-      format: (numberinfo) => formatCurrency(numberinfo),
+      format: (numberinfo) => formatCurrencyToTable(numberinfo),
     },
     {
       columnLabel: "Rendimento total",
       accessor: "totalInterestReturns",
-      format: (numberinfo) => formatCurrency(numberinfo),
+      format: (numberinfo) => formatCurrencyToTable(numberinfo),
     },
     {
       columnLabel: "Montante total",
       accessor: "totalAmount",
-      format: (numberinfo) => formatCurrency(numberinfo),
+      format: (numberinfo) => formatCurrencyToTable(numberinfo),
     },
   ];
-  /*
+
   const returnFinalInvestmentObject = returnsArray[returnsArray.length - 1];
 
   doughnutChartReference = new Chart(finalMoneyChart, {
@@ -80,12 +84,12 @@ function renderProgression(evt) {
       datasets: [
         {
           data: [
-            formatCurrency(returnFinalInvestmentObject.investedAmount),
-            formatCurrency(
+            formatCurrencyToGraph(returnFinalInvestmentObject.investedAmount),
+            formatCurrencyToGraph(
               returnFinalInvestmentObject.totalInterestReturns *
                 (1 - taxRate / 100),
             ),
-            formatCurrency(
+            formatCurrencyToGraph(
               returnFinalInvestmentObject.totalInterestReturns *
                 (taxRate / 100),
             ),
@@ -109,7 +113,7 @@ function renderProgression(evt) {
         {
           label: "Total Investido",
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.investedAmount),
+            formatCurrencyToGraph(investmentObject.investedAmount),
           ),
           backgroundColor: "rgb(255, 99, 132)",
         },
@@ -117,7 +121,7 @@ function renderProgression(evt) {
         {
           label: "Retorno do Investimento",
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.interestReturns),
+            formatCurrencyToGraph(investmentObject.interestReturns),
           ),
           backgroundColor: "rgb(54, 162, 235)",
         },
@@ -133,7 +137,7 @@ function renderProgression(evt) {
         },
       },
     },
-  });*/
+  });
   createTable(columnsArray, returnsArray, "results-table");
 }
 
