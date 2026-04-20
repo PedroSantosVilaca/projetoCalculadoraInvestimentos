@@ -1,6 +1,7 @@
 import "./style.css";
 import { generateReturnsArray } from "./investmentGoals.js";
 import { Chart } from "chart.js/auto";
+import { createTable } from "./table.js";
 
 const finalMoneyChart = document.getElementById("final-money-distribution");
 const progressionChart = document.getElementById("progression");
@@ -11,7 +12,7 @@ let doughnutChartReference = {};
 let progressionChartReference = {};
 
 function formatCurrency(value) {
-  return value.toFixed(2);
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 function renderProgression(evt) {
@@ -46,6 +47,30 @@ function renderProgression(evt) {
     returnRate,
     returnRatePeriod,
   );
+  const columnsArray = [
+    { columnLabel: "Mês", accessor: "month" },
+    {
+      columnLabel: "Valor investido",
+      accessor: "investedAmount",
+      format: (numberinfo) => formatCurrency(numberinfo),
+    },
+    {
+      columnLabel: "Rendimento",
+      accessor: "interestReturns",
+      format: (numberinfo) => formatCurrency(numberinfo),
+    },
+    {
+      columnLabel: "Rendimento total",
+      accessor: "totalInterestReturns",
+      format: (numberinfo) => formatCurrency(numberinfo),
+    },
+    {
+      columnLabel: "Montante total",
+      accessor: "totalAmount",
+      format: (numberinfo) => formatCurrency(numberinfo),
+    },
+  ];
+  /*
   const returnFinalInvestmentObject = returnsArray[returnsArray.length - 1];
 
   doughnutChartReference = new Chart(finalMoneyChart, {
@@ -108,7 +133,8 @@ function renderProgression(evt) {
         },
       },
     },
-  });
+  });*/
+  createTable(columnsArray, returnsArray, "results-table");
 }
 
 function isObjectEmpty(obj) {
@@ -138,7 +164,7 @@ function clearForm() {
 
   for (const errorInputContainer of errorInputContainers) {
     errorInputContainer.classList.remove("error");
-    errorInputContainer.parentElement.querySelector("p").remove;
+    errorInputContainer.parentElement.querySelector("p").remove();
   }
 }
 

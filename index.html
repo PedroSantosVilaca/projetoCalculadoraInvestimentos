@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora Investimentos</title>
-    <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="h-[100dvh] grid grid-cols-3 grid-rows-2">
     <aside
@@ -19,7 +18,7 @@
           <div class="flex">
             <input
               value="R$"
-              class="w-1/6 text center rounded-l-lg"
+              class="w-1/6 text-center rounded-l-lg"
               type="type"
               disabled
             />
@@ -145,7 +144,7 @@
       </div>
     </aside>
     <main class="row-span-2 col-span-2">
-      <section id="charts-container" class="h-full"> 
+      <!--<section id="charts-container" class="h-full"> 
         <div class="h-[36%] flex flex-col items-center pb-10" >  
           <p class="font-bold text-lg">Resultado Final</p>
           <canvas id="final-money-distribution"></canvas>
@@ -154,9 +153,14 @@
           <p class="font-bold text-lg">Progressão</p>
           <canvas id="progression"></canvas>
         </div>
+      </section> -->
+      <section id="table-container" class="h-full overflow-y-auto">
+        <p class="font-bold text-lg text-center">Resultados Mensais</p>
+        <table
+          class="w-full max-h-full border border-separate"
+          id="results-table"
+        ></table>
       </section>
-   
-      </script>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>
